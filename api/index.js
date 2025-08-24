@@ -4,6 +4,8 @@ import cors from "cors";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import serverless from "serverless-http";
+
 import { errorHandler, NotFound } from "../src/middlewares/errorHandler.js";
 import { registerRoute } from "../src/routes/auth.js";
 import { categRoute } from "../src/routes/category.js";
@@ -13,13 +15,11 @@ import { passRoute } from "../src/routes/password.js";
 import { connectDB } from "../src/config/db.js";
 import { userRoute } from "../src/routes/user.js";
 
-// Fix __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Middlewares
 app.use(
   helmet({
     contentSecurityPolicy: false, // Disable CSP for Vercel compatibility
@@ -39,12 +39,9 @@ app.use(morgan("combined"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../src/views"));
 
-// Static files - Note: Vercel handles static files differently
 app.use("/images", express.static(path.join(__dirname, "../images")));
 
-// Database connection middleware for serverless
 let isConnected = false;
-
 app.use(async (req, res, next) => {
   if (!isConnected) {
     try {
@@ -58,7 +55,7 @@ app.use(async (req, res, next) => {
   next();
 });
 
-// Routes
+
 app.use("/api/auth", registerRoute);
 app.use("/api/password", passRoute);
 app.use("/api/users", userRoute);
@@ -66,7 +63,6 @@ app.use("/api/categories", categRoute);
 app.use("/api/subcategories", subCateg);
 app.use("/api/products", productRoute);
 
-// Health check
 app.get("/api/health", (req, res) => {
   res.json({
     status: "OK",
@@ -75,7 +71,6 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// Root route
 app.get("/", (req, res) => {
   res.json({
     message: "Hedaya API - Vercel Serverless",
@@ -96,4 +91,5 @@ app.get("/", (req, res) => {
 app.use(NotFound);
 app.use(errorHandler);
 
-export default app;
+const handler = serverless(app);
+export default handler;
