@@ -50,4 +50,5 @@ productsSchema.virtual("finalPrice").get(function () {
   return val.toFixed(2);
 });
 
-export const Product = model("Product", productsSchema);
+const Product = mongoose.models.Product || model("Product", productsSchema);
+export default Product;

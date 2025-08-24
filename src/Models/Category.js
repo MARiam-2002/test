@@ -35,4 +35,5 @@ const categorySchema = new Schema(
   { timestamps: true, versionKey: false }
 );
 
-export const Category = model("Category", categorySchema);
+const Category = mongoose.models.Category || model("Category", categorySchema);
+export default Category;
