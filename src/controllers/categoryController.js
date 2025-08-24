@@ -1,11 +1,11 @@
 import expressAsyncHandler from "express-async-handler";
-import { Category } from "../models/Category.js";
 import slugify from "slugify";
 import {
   deleteImage,
   handleImageUpdate,
   uploadSingleImage,
 } from "../services/cloudinaryService.js";
+import Category from "../models/Category.js";
 
 export const createCategory = expressAsyncHandler(async (req, res) => {
   let image = null;

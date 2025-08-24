@@ -1,5 +1,5 @@
 import expressAsyncHandler from "express-async-handler";
-import { User } from "../models/User.js";
+import  User  from "../models/User.js";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import bcrypt from "bcryptjs";
