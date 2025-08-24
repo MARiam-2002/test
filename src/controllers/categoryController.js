@@ -1,5 +1,5 @@
 import expressAsyncHandler from "express-async-handler";
-import { Category } from "../Models/Category.js";
+import { Category } from "../models/Category.js";
 import slugify from "slugify";
 import {
   deleteImage,

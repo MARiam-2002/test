@@ -1,6 +1,6 @@
 // Users\WEB\Desktop\hedaya\src\controllers\productController.js
 import expressAsyncHandler from "express-async-handler";
-import { Product } from "../Models/Products.js";
+import { Product } from "../models/Products.js";
 import {
   deleteImage,
   deleteMultipleImages,

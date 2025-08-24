@@ -1,7 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import { generateToken } from "../utils/token.js";
 import bcrypt from "bcryptjs";
-import User from "../../src/Models/User.js";
+import User from "../models/User.js";
 /**
  * @description Register new user
  * @method      POST

@@ -1,5 +1,5 @@
 import expressAsyncHandler from "express-async-handler";
-import { subCategory } from "../Models/subCategory.js";
+import { subCategory } from "../models/subCategory.js";
 import slugify from "slugify";
 
 export const createSubCateg = expressAsyncHandler(async (req, res) => {
